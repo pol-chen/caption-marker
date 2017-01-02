@@ -6,6 +6,16 @@ class App extends React.Component {
 	constructor(props) {
 		super(props)
 	}
+  componentDidMount() {
+    var videoElement = document.querySelector("video")
+    var textTrack = videoElement.textTracks[0]
+    textTrack.oncuechange = function (){
+      var cue = this.activeCues[0]
+      if (cue) {
+        console.log(cue.startTime, cue.endTime, cue.text)
+      }
+    }
+  }
 	render() {
 		return (
 			<div className="app">
