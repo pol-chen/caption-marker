@@ -28,7 +28,6 @@ class Video extends React.Component {
             <source src="videos/sample.mp4" type="video/mp4" />
             <track label="Simplified Chinese" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" default />
          </video>
-         <figcaption>&copy; Polaris Chen</figcaption>
       </figure>
 		)
 	}

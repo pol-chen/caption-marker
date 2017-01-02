@@ -9,7 +9,7 @@ class LogBar extends React.Component {
 	render() {
 		return (
       <div className="logBar">
-        {this.props.log}
+        {this.props.logText}
       </div>
 		)
 	}

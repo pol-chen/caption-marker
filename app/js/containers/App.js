@@ -12,7 +12,7 @@ class App extends React.Component {
 		super(props)
     this.state = {
 			activeCue: null,
-      log: 'Initial log'
+      logText: 'Caption Marker - Use key 1/2/3 to mark errors in captions'
 		}
     document.onkeypress = this.handleKeyPress
 	}
@@ -49,19 +49,19 @@ class App extends React.Component {
       }
       console.log('Marking', markedIndex, markedText)
       const content = `Cue ID: ${cueId}; Text: ${cueText}; Marked Text: ${markedText}; Marked Position: ${markedIndex}`
-      const log = `Marked "${markedText}" in ${markedIndex}/3 of cue ${cueId}`
-      this.setState({log: log})
+      const logText = `Marked "${markedText}" in ${markedIndex}/3 of cue ${cueId}`
+      this.setState({logText: logText})
       log.append(content)
     } else {
       console.log('Not marked')
-      this.setState({log: 'Not marked'})
+      this.setState({logText: 'Not marked'})
     }
   }
 	render() {
 		return (
 			<div className="app">
         <Video onCueChange={this.handleCueChange} />
-        <LogBar log={this.state.log} />
+        <LogBar logText={this.state.logText} />
 			</div>
 		)
 	}
