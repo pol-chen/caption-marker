@@ -13,6 +13,7 @@ class App extends React.Component {
         <figure id="videoContainer">
            <video id="video" controls preload="metadata" poster="img/poster.png">
               <source src="videos/sample.mp4" type="video/mp4" />
+              <track label="Simplified Chinese" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" default />
            </video>
            <figcaption>&copy; Polaris Chen</figcaption>
         </figure>
