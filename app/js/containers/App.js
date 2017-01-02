@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import Video from '../components/Video'
+
 const log = window.require('./log')
 
 class App extends React.Component {
@@ -10,21 +12,10 @@ class App extends React.Component {
     this.state = {
 			activeCue: null,
 		}
-	}
-  componentDidMount() {
-    const videoElement = document.querySelector("video")
-    const textTrack = videoElement.textTracks[0]
-    const that = this
-    textTrack.oncuechange = function () {
-      const cue = this.activeCues[0]
-      if (cue) {
-        console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
-        that.setState({activeCue: cue})
-      } else {
-        that.setState({activeCue: null})
-      }
-    }
     document.onkeypress = this.handleKeyPress
+	}
+  handleCueChange = cue => {
+    this.setState({activeCue: cue})
   }
   handleKeyPress = event => {
     const firstKeyCode = 49
@@ -64,14 +55,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div className="app">
-        <h1>Hi there</h1>
-        <figure id="videoContainer">
-           <video id="video" controls preload="metadata" poster="img/poster.png">
-              <source src="videos/sample.mp4" type="video/mp4" />
-              <track label="Simplified Chinese" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" default />
-           </video>
-           <figcaption>&copy; Polaris Chen</figcaption>
-        </figure>
+        <Video onCueChange={this.handleCueChange} />
 			</div>
 		)
 	}
