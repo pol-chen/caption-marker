@@ -1,11 +1,35 @@
 {
-  "name": "caption-marker",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ./app --enable-logging",
+    "watch": "webpack-dev-server",
+    "dev": "NODE_ENV='development' npm run start",
+    "electron-rebuild": "electron-rebuild",
+    "postinstall": "install-app-deps",
   },
-  "author": "",
-  "license": "ISC"
+  "devDependencies": {
+    "babel-core": "^6.7.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.25.0",
+    "devtron": "^1.3.0",
+    "electron": "^1.4.0",
+    "electron-builder": "^6.7.7",
+    "electron-devtools-installer": "^2.0.1",
+    "electron-rebuild": "^1.1.3",
+    "file-loader": "^0.9.0",
+    "json-loader": "^0.5.4",
+    "less": "^2.6.1",
+    "less-loader": "^2.2.2",
+    "node-libs-browser": "^1.0.0",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PolarisChen/caption-marker"
+  }
 }

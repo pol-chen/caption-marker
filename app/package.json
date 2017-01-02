@@ -1,0 +1,19 @@
+{
+  "name": "caption-marker",
+  "productName": "Caption Marker",
+  "version": "0.0.1",
+  "description": "A marker for errors in captions.",
+  "author": {
+    "name": "Polaris Chen",
+    "email": "polaris_chen@163.com"
+  },
+  "copyright": "© 2017 Polaris Chen",
+  "license": "MIT",
+  "homepage": "http://bus1996.me",
+  "main": "main.js",
+  "dependencies": {
+    "nconf": "^0.8.4",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
+  }
+}
