@@ -2,11 +2,13 @@
 
 import React from 'react'
 
+const log = window.require('./log')
+
 class App extends React.Component {
 	constructor(props) {
 		super(props)
     this.state = {
-			activeCueText: '',
+			activeCue: null,
 		}
 	}
   componentDidMount() {
@@ -16,9 +18,10 @@ class App extends React.Component {
     textTrack.oncuechange = function () {
       const cue = this.activeCues[0]
       if (cue) {
-        console.log(cue.startTime, cue.endTime, cue.text)
-        that.setState({activeCueText: cue.text})
-        console.log('Active cue:', that.state.activeCueText)
+        console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
+        that.setState({activeCue: cue})
+      } else {
+        that.setState({activeCue: null})
       }
     }
     document.onkeypress = this.handleKeyPress
@@ -28,23 +31,34 @@ class App extends React.Component {
     const secondKeyCode = 50
     const thirdKeyCode = 51
 
-    const cueText = this.state.activeCueText
-    const length = Math.floor(cueText.length / 3)
-    switch (event.keyCode) {
-      case firstKeyCode:
-        console.log('1 pressed')
-        console.log('Marking', cueText.substring(0, length))
-        break;
-      case secondKeyCode:
-        console.log('2 pressed')
-        console.log('Marking', cueText.substring(length, length * 2))
-        break;
-      case thirdKeyCode:
-        console.log('3 pressed')
-        console.log('Marking', cueText.substring(length * 2, cueText.length))
-        break;
-      default:
-        break;
+    const cue = this.state.activeCue
+    if (cue != null && event.keyCode >= firstKeyCode && event.keyCode <= thirdKeyCode) {
+      const cueId = cue.id
+      const cueText = cue.text
+      const length = Math.floor(cueText.length / 3)
+      let markedIndex = 0
+      let markedText = ''
+      switch (event.keyCode) {
+        case firstKeyCode:
+          markedIndex = 1
+          markedText = cueText.substring(0, length)
+          break;
+        case secondKeyCode:
+          markedIndex = 2
+          markedText = cueText.substring(length, length * 2)
+          break;
+        case thirdKeyCode:
+          markedIndex = 3
+          markedText = cueText.substring(length * 2, cueText.length)
+          break;
+        default:
+          break;
+      }
+      console.log('Marking', markedIndex, markedText)
+      const content = `Cue ID: ${cueId}; Text: ${cueText}; Marked Text: ${markedText}; Marked Position: ${markedIndex}`
+      log.append(content)
+    } else {
+      console.log('Not marking')
     }
   }
 	render() {
