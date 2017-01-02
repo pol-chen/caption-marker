@@ -9,11 +9,31 @@ class App extends React.Component {
   componentDidMount() {
     var videoElement = document.querySelector("video")
     var textTrack = videoElement.textTracks[0]
-    textTrack.oncuechange = function (){
-      var cue = this.activeCues[0]
-      if (cue) {
-        console.log(cue.startTime, cue.endTime, cue.text)
-      }
+    textTrack.oncuechange = this.handleCueChange
+    document.onkeypress = this.handleKeyPress
+  }
+  handleCueChange = function () {
+    var cue = this.activeCues[0]
+    if (cue) {
+      console.log(cue.startTime, cue.endTime, cue.text)
+    }
+  }
+  handleKeyPress = event => {
+    const firstKeyCode = 49
+    const secondKeyCode = 50
+    const thirdKeyCode = 51
+    switch (event.keyCode) {
+      case firstKeyCode:
+        console.log('1 pressed')
+        break;
+      case secondKeyCode:
+        console.log('2 pressed')
+        break;
+      case thirdKeyCode:
+        console.log('3 pressed')
+        break;
+      default:
+        break;
     }
   }
 	render() {
