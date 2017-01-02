@@ -3,6 +3,7 @@
 import React from 'react'
 
 import Video from '../components/Video'
+import LogBar from '../components/LogBar'
 
 const log = window.require('./log')
 
@@ -11,6 +12,7 @@ class App extends React.Component {
 		super(props)
     this.state = {
 			activeCue: null,
+      log: 'Initial log'
 		}
     document.onkeypress = this.handleKeyPress
 	}
@@ -47,15 +49,19 @@ class App extends React.Component {
       }
       console.log('Marking', markedIndex, markedText)
       const content = `Cue ID: ${cueId}; Text: ${cueText}; Marked Text: ${markedText}; Marked Position: ${markedIndex}`
+      const log = `Marked "${markedText}" in ${markedIndex}/3 of cue ${cueId}`
+      this.setState({log: log})
       log.append(content)
     } else {
-      console.log('Not marking')
+      console.log('Not marked')
+      this.setState({log: 'Not marked'})
     }
   }
 	render() {
 		return (
 			<div className="app">
         <Video onCueChange={this.handleCueChange} />
+        <LogBar log={this.state.log} />
 			</div>
 		)
 	}
