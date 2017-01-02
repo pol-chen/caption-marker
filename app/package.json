@@ -12,6 +12,7 @@
   "homepage": "http://bus1996.me",
   "main": "main.js",
   "dependencies": {
+    "fs": "0.0.1-security",
     "nconf": "^0.8.4",
     "react": "^15.3.0",
     "react-dom": "^15.3.0"
