@@ -4,7 +4,7 @@
     "watch": "webpack-dev-server",
     "dev": "NODE_ENV='development' npm run start",
     "electron-rebuild": "electron-rebuild",
-    "postinstall": "install-app-deps",
+    "postinstall": "install-app-deps"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
