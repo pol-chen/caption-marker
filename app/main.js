@@ -3,8 +3,8 @@ const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
 const backgroundColor = '#F8F8F8'
-const windowWidth = 960;
-const windowHeight = 600;
+const windowWidth = 1280;
+const windowHeight = 780;
 
 let mainWindow
 
