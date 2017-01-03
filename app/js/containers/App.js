@@ -31,22 +31,28 @@ class App extends React.Component {
       const length = Math.floor(cueText.length / 3)
       let markedIndex = 0
       let markedText = ''
+      let regx
       switch (event.keyCode) {
         case firstKeyCode:
           markedIndex = 1
-          markedText = cueText.substring(0, length)
+          regx = /<c\.n1>(.*?)<\/c>/
+          // markedText = cueText.substring(0, length)
           break;
         case secondKeyCode:
           markedIndex = 2
-          markedText = cueText.substring(length, length * 2)
+          regx = /<c\.n2>(.*?)<\/c>/
+          // markedText = cueText.substring(length, length * 2)
           break;
         case thirdKeyCode:
           markedIndex = 3
-          markedText = cueText.substring(length * 2, cueText.length)
+          regx = /<c\.n3>(.*?)<\/c>/
+          // markedText = cueText.substring(length * 2, cueText.length)
           break;
         default:
           break;
       }
+      let texts = cueText.match(regx);
+      markedText = texts[1]
       console.log('Marking', markedIndex, markedText)
       const content = `Cue ID: ${cueId}; Text: ${cueText}; Marked Text: ${markedText}; Marked Position: ${markedIndex}`
       const logText = `Marked "${markedText}" in ${markedIndex}/3 of cue ${cueId}`
