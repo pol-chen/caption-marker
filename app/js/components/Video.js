@@ -26,8 +26,8 @@ class Video extends React.Component {
       <figure id="videoContainer">
          <video id="video" controls preload="metadata" poster="img/poster.png">
             <source src="videos/sample.mp4" type="video/mp4" />
-            <track label="Split" kind="subtitles" srcLang="zh" src="captions/vtt/sample-split.vtt" default />
-            <track label="Plain" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" />
+            <track label="Plain" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" default />
+            <track label="Split" kind="subtitles" srcLang="zh" src="captions/vtt/sample-split.vtt" />
          </video>
       </figure>
 		)
