@@ -5,8 +5,7 @@ const fs = require('fs')
 const logPath = getUserHome() + '/Documents/caption-marker-log.txt'
 
 function append(content) {
-  const time = new Date
-  const log = `[${time}] ${content}\n`
+  const log = `${content}\n`
   fs.appendFile(logPath, log, 'utf8', (err) => {
     if (err) throw err
     console.log('Apppended', content)
