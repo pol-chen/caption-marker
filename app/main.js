@@ -4,7 +4,7 @@ const path = require('path')
 
 const backgroundColor = '#F8F8F8'
 const windowWidth = 1280;
-const windowHeight = 780;
+const windowHeight = 744;
 
 let mainWindow
 
