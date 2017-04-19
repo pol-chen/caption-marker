@@ -162,7 +162,8 @@ class Video extends React.Component {
 			const markDone = mark
 			const markTime = document.querySelector('video').currentTime - cue.startTime
 
-			const logContent = `${name}|${video}|${speed}|${caption}|${captionError}|${captionId}|${captionStartTime}|${captionSection}|${sectionWithError}|${markDone}|${markTime}`
+			const sep = '\t'
+			const logContent = name+sep+video+sep+speed+sep+caption+sep+captionError+sep+captionId+sep+captionStartTime+sep+captionSection+sep+sectionWithError+sep+markDone+sep+markTime
       log.append(logContent)
 
 			console.log('Marked', logContent)
