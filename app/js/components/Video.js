@@ -5,13 +5,22 @@ import React from 'react'
 const log = window.require('./log')
 const config = window.require('./config')
 
+let capStyle = {
+	width: 200,
+	marginLeft: -100
+}
+
+let appendedMode = true
+
 class Video extends React.Component {
 	constructor(props) {
 		super(props)
 		document.onkeypress = this.handleKeyPress
 		this.state = {
+			visibility: 'visible',
 			capCount: 0,
-			capString: ''
+			capString: '',
+			lastEndTime: 0
 		}
 	}
   componentDidMount() {
@@ -24,28 +33,48 @@ class Video extends React.Component {
 		const that = this
 		textTrack.oncuechange = function () {
 			const cue = this.activeCues[0]
-			const capCount = that.state.capCount
-			if (capCount == 2) {
-				that.setState({capCount: 0})
-				that.setState({capString: ''})
-			}
-			if (cue) {
-				console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
-				const lastCap = that.state.capString
-				const separator = '　'
-				let capString
-				if (lastCap) {
-					capString = lastCap + separator + cue.text
-					that.setState({capCount: capCount + 1})
-				} else {
-					capString = cue.text
+			const lastEndTime = that.state.lastEndTime
+			// if (cue.endTime != lastEndTime) {
+				const capCount = that.state.capCount
+				if (capCount == 2) {
+					that.setState({capCount: 0})
+					that.setState({capString: ''})
+					capStyle = {
+						visibility: 'hidden',
+						width: 0
+					}
+					console.log('Set zero 2')
 				}
-				that.setState({capString: capString})
-			} else {
-				console.log('No cue')
-				that.setState({capCount: 0})
-				that.setState({capString: ''})
-			}
+				if (cue) {
+					console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
+					const lastCap = that.state.capString
+					const separator = '　'
+					let capString
+					if (cue.startTime - lastEndTime < 0.2 && lastCap) {
+						capString = lastCap + separator + cue.text
+						that.setState({capCount: capCount + 1})
+					} else {
+						capString = cue.text
+					}
+					const capWidth = capString.length * 36 + 18
+					capStyle = {
+						visibility: 'visible',
+						width: capWidth,
+						marginLeft: -capWidth / 2
+					}
+					that.setState({capString: capString})
+					that.setState({lastEndTime: cue.endTime})
+				} else {
+					console.log('No cue')
+					that.setState({capCount: 0})
+					that.setState({capString: ''})
+					capStyle = {
+						visibility: 'hidden',
+						width: 0
+					}
+					console.log('Set zero')
+				}
+			// }
 		}
   }
 	initConfig() {
@@ -64,28 +93,33 @@ class Video extends React.Component {
 		let cue = textTrack.activeCues[0]
 		let mark = 0
 		if (cue) {
-			let cueText = cue.text
-      let texts = cueText.match(/^(.*?)\s{4}(.*?)\s{4}(.*?)$/)
-			if (texts == null) {
-				texts = cueText.match(/^(.*?)\s{4}(.*?)$/)
-			}
-			if (texts == null) {
-				texts = cueText.match(/^(.*?)$/)
-			}
-
 			let index = event.keyCode - offset
-			let focusText = texts[index].match(/<c\.n1>(.*?)<\/c>/)
-			let newFocusText
-			if (focusText) {
-				newFocusText = focusText[1]
-				mark = 0
+
+			if (appendedMode) {
+				console.log('Pressed', index, '/', this.state.capCount+1);
 			} else {
-				newFocusText = `<c.n1>${texts[index]}</c>`
-				mark = 1
+				let cueText = cue.text
+	      let texts = cueText.match(/^(.*?)\s{4}(.*?)\s{4}(.*?)$/)
+				if (texts == null) {
+					texts = cueText.match(/^(.*?)\s{4}(.*?)$/)
+				}
+				if (texts == null) {
+					texts = cueText.match(/^(.*?)$/)
+				}
+
+				let focusText = texts[index].match(/<c\.n1>(.*?)<\/c>/)
+				let newFocusText
+				if (focusText) {
+					newFocusText = focusText[1]
+					mark = 0
+				} else {
+					newFocusText = `<c.n1>${texts[index]}</c>`
+					mark = 1
+				}
+				cue.text = cueText.replace(texts[index], newFocusText)
+				cue.align = 'start'
+				cue.align = 'middle' // For force refresh
 			}
-			cue.text = cueText.replace(texts[index], newFocusText)
-			cue.align = 'start'
-			cue.align = 'middle' // For force refresh
 
 			const name = config.readConfig('name')
 			const video = config.readConfig('video')
@@ -93,9 +127,13 @@ class Video extends React.Component {
 			const caption = config.readConfig('caption')
 			const captionError = config.readConfig('captionError')
 
+			if (appendedMode) {
+				cue = textTrack.cues[textTrack.activeCues[0].id-1-(this.state.capCount+1-index)]
+				console.log('Appended Mode:', cue.text);
+			}
 			const captionId = cue.id
 			const captionStartTime = cue.startTime
-			const captionSection = `${cue.id}-${index}`
+			const captionSection = appendedMode ? cue.id : `${cue.id}-${index}`
 			const sectionWithError = config.hasError(captionSection)
 			const markDone = mark
 			const markTime = document.querySelector('video').currentTime - cue.startTime
@@ -118,7 +156,7 @@ class Video extends React.Component {
             <track label="Plain" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" />
             <track label="Split" kind="subtitles" srcLang="zh" src="captions/vtt/sample-split.vtt" />
          </video>
-         <div id="cap">{this.state.capString}</div>
+         <div id="cap" style={capStyle}></div>
       </figure>
 		)
 	}
