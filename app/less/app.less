@@ -9,14 +9,32 @@
 }
 
 #videoContainer {
+	// display: flex;
+	// flex-direction: column;
+	// align-items: center;
+	position: relative;
+	height: 100%;
   margin: 0;
 }
 
+#video {
+	// position: absolute;
+}
+
 #cap {
-	position: absolute;
-	left: 0;
-	top: 0;
-	background: #FFF;
+	position: relative;
+	width: 100px;
+	height: 52px;
+	bottom: 150px;
+  left: 50%;
+	margin-left: -50px;
+	color: #FFF;
+	font-size: 36px;
+	text-align: center;
+	background: #000;
+	transition: margin-left .2s ease-in-out;
+	overflow: hidden;
+	z-index: 1000;
 }
 
 ::cue {
