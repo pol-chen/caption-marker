@@ -9,10 +9,43 @@ class Video extends React.Component {
 	constructor(props) {
 		super(props)
 		document.onkeypress = this.handleKeyPress
+		this.state = {
+			capCount: 0,
+			capString: ''
+		}
 	}
   componentDidMount() {
 		if (!config.readConfig('video')) {
 			this.initConfig()
+		}
+
+		const textTrack = document.querySelector('video').textTracks[0]
+		const cap = document.querySelector('#cap')
+		const that = this
+		textTrack.oncuechange = function () {
+			const cue = this.activeCues[0]
+			const capCount = that.state.capCount
+			if (capCount == 2) {
+				that.setState({capCount: 0})
+				that.setState({capString: ''})
+			}
+			if (cue) {
+				console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
+				const lastCap = that.state.capString
+				const separator = '　'
+				let capString
+				if (lastCap) {
+					capString = lastCap + separator + cue.text
+					that.setState({capCount: capCount + 1})
+				} else {
+					capString = cue.text
+				}
+				that.setState({capString: capString})
+			} else {
+				console.log('No cue')
+				that.setState({capCount: 0})
+				that.setState({capString: ''})
+			}
 		}
   }
 	initConfig() {
@@ -80,10 +113,12 @@ class Video extends React.Component {
       <figure id="videoContainer">
          <video id="video" controls preload="metadata" poster="img/poster.png">
             <source src="videos/sample.mp4" type="video/mp4" />
-            <track label="Spaced" kind="subtitles" srcLang="zh" src="captions/vtt/sample-spaced.vtt" default />
+            <track label="Appended" kind="subtitles" srcLang="zh" src="captions/vtt/sample-appended.vtt" default />
+            <track label="Spaced" kind="subtitles" srcLang="zh" src="captions/vtt/sample-spaced.vtt" />
             <track label="Plain" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" />
             <track label="Split" kind="subtitles" srcLang="zh" src="captions/vtt/sample-split.vtt" />
          </video>
+         <div id="cap">{this.state.capString}</div>
       </figure>
 		)
 	}
