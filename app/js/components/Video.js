@@ -53,8 +53,10 @@ class Video extends React.Component {
 					if (cue.startTime - lastEndTime < 0.2 && lastCap) {
 						capString = lastCap + separator + cue.text
 						that.setState({capCount: capCount + 1})
+						cap.innerHTML = cap.innerHTML + separator + cue.text
 					} else {
 						capString = cue.text
+						cap.innerHTML = capString
 					}
 					const capWidth = capString.length * 36 + 18
 					capStyle = {
@@ -88,6 +90,7 @@ class Video extends React.Component {
 	}
   handleKeyPress = event => {
     const textTrack = document.querySelector('video').textTracks[0]
+		const cap = document.querySelector('#cap')
 		const offset = 48
 
 		let cue = textTrack.activeCues[0]
@@ -97,6 +100,27 @@ class Video extends React.Component {
 
 			if (appendedMode) {
 				console.log('Pressed', index, '/', this.state.capCount+1);
+
+				let cueText = cap.innerHTML
+				let texts = cueText.match(/^(.*?)　(.*?)　(.*?)$/)
+				if (texts == null) {
+					texts = cueText.match(/^(.*?)　(.*?)$/)
+				}
+				if (texts == null) {
+					texts = cueText.match(/^(.*?)$/)
+				}
+
+				let focusText = texts[index].match(/<span class="highlight">(.*?)<\/span>/)
+				let newFocusText
+				if (focusText) {
+					newFocusText = focusText[1]
+					mark = 0
+				} else {
+					newFocusText = `<span class="highlight">${texts[index]}</span>`
+					mark = 1
+				}
+				cap.innerHTML = cueText.replace(texts[index], newFocusText)
+
 			} else {
 				let cueText = cue.text
 	      let texts = cueText.match(/^(.*?)\s{4}(.*?)\s{4}(.*?)$/)

@@ -25,7 +25,7 @@
 	position: relative;
 	width: 100px;
 	height: 52px;
-	bottom: 150px;
+	bottom: 100px;
   left: 50%;
 	margin-left: -50px;
 	color: #FFF;
@@ -36,11 +36,14 @@
 	overflow: hidden;
 	z-index: 1000;
 }
+.highlight {
+	color: @brand-color;
+}
 
 ::cue {
 }
 ::cue(.n1) {
-  color: #e74c3c;
+  color: @brand-color;
 }
 ::cue(.n2) {
   color: #f1c40f;
