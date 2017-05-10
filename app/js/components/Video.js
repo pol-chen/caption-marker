@@ -6,8 +6,7 @@ const log = window.require('./log')
 const config = window.require('./config')
 
 let capStyle = {
-	width: 200,
-	marginLeft: -100
+	width: 200
 }
 
 let appendedMode = true
@@ -62,8 +61,8 @@ class Video extends React.Component {
 					const capWidth = capString.length * 36 + 18
 					capStyle = {
 						visibility: 'visible',
-						width: capWidth,
-						marginLeft: -capWidth / 2
+						width: capWidth
+						// marginLeft: -capWidth / 2
 					}
 					that.setState({capString: capString})
 					that.setState({lastEndTime: cue.endTime})
