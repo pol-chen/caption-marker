@@ -172,10 +172,12 @@ class Video extends React.Component {
 		}
 	}
 	render() {
+		const videoFilename = config.readConfig('videoFilename')
+		const sourcePath = `videos/${videoFilename}.mp4`
 		return (
       <figure id="videoContainer">
          <video id="video" controls preload="metadata" poster="img/poster.png">
-            <source src="videos/sample.mp4" type="video/mp4" />
+            <source src={sourcePath} type="video/mp4" />
             <track label="Appended" kind="subtitles" srcLang="zh" src="captions/vtt/sample-appended.vtt" default />
             <track label="Spaced" kind="subtitles" srcLang="zh" src="captions/vtt/sample-spaced.vtt" />
             <track label="Plain" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" />
