@@ -9,14 +9,13 @@ let capStyle = {
 	width: 200
 }
 
-let appendedMode = true
+let appendedMode = false
 
 class Video extends React.Component {
 	constructor(props) {
 		super(props)
 		document.onkeypress = this.handleKeyPress
 		this.state = {
-			visibility: 'visible',
 			capCount: 0,
 			capString: '',
 			lastEndTime: 0
@@ -27,56 +26,64 @@ class Video extends React.Component {
 			this.initConfig()
 		}
 
-		const textTrack = document.querySelector('video').textTracks[0]
-		const cap = document.querySelector('#cap')
-		const that = this
-		textTrack.mode = 'hidden'
-		textTrack.oncuechange = function () {
-			const cue = this.activeCues[0]
-			const lastEndTime = that.state.lastEndTime
-			// if (cue.endTime != lastEndTime) {
-				const capCount = that.state.capCount
-				if (capCount == 2) {
-					that.setState({capCount: 0})
-					that.setState({capString: ''})
-					capStyle = {
-						visibility: 'hidden',
-						width: 0
+		if (appendedMode) {
+			const textTrack = document.querySelector('video').textTracks[0]
+			const cap = document.querySelector('#cap')
+			const that = this
+			textTrack.mode = 'hidden'
+			textTrack.oncuechange = function () {
+				const cue = this.activeCues[0]
+				const lastEndTime = that.state.lastEndTime
+				// if (cue.endTime != lastEndTime) {
+					const capCount = that.state.capCount
+					if (capCount == 2) {
+						that.setState({capCount: 0})
+						that.setState({capString: ''})
+						capStyle = {
+							visibility: 'hidden',
+							width: 0
+						}
+						console.log('Set zero 2')
 					}
-					console.log('Set zero 2')
-				}
-				if (cue) {
-					console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
-					const lastCap = that.state.capString
-					const separator = '　'
-					let capString
-					if (cue.startTime - lastEndTime < 0.2 && lastCap) {
-						capString = lastCap + separator + cue.text
-						that.setState({capCount: capCount + 1})
-						cap.innerHTML = cap.innerHTML + separator + cue.text
+					if (cue) {
+						console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
+						const lastCap = that.state.capString
+						const separator = '　'
+						let capString
+						if (cue.startTime - lastEndTime < 0.2 && lastCap) {
+							capString = lastCap + separator + cue.text
+							that.setState({capCount: capCount + 1})
+							cap.innerHTML = cap.innerHTML + separator + cue.text
+						} else {
+							capString = cue.text
+							cap.innerHTML = capString
+						}
+						const capWidth = capString.length * 36 + 18
+						capStyle = {
+							visibility: 'visible',
+							width: capWidth
+						}
+						that.setState({capString: capString})
+						that.setState({lastEndTime: cue.endTime})
 					} else {
-						capString = cue.text
-						cap.innerHTML = capString
+						console.log('No cue')
+						that.setState({capCount: 0})
+						that.setState({capString: ''})
+						capStyle = {
+							visibility: 'hidden',
+							width: 0
+						}
+						console.log('Set zero')
 					}
-					const capWidth = capString.length * 36 + 18
-					capStyle = {
-						visibility: 'visible',
-						width: capWidth
-						// marginLeft: -capWidth / 2
-					}
-					that.setState({capString: capString})
-					that.setState({lastEndTime: cue.endTime})
-				} else {
-					console.log('No cue')
-					that.setState({capCount: 0})
-					that.setState({capString: ''})
-					capStyle = {
-						visibility: 'hidden',
-						width: 0
-					}
-					console.log('Set zero')
-				}
-			// }
+				// }
+			}
+		} else {
+			this.setState({capCount: 0})
+			this.setState({capString: ''})
+			capStyle = {
+				visibility: 'hidden',
+				width: 0
+			}
 		}
   }
 	initConfig() {
@@ -178,8 +185,8 @@ class Video extends React.Component {
       <figure id="videoContainer">
          <video id="video" controls preload="metadata" poster="img/poster.png">
             <source src={sourcePath} type="video/mp4" />
-            <track label="Appended" kind="subtitles" srcLang="zh" src="captions/vtt/sample-appended.vtt" default />
-            <track label="Spaced" kind="subtitles" srcLang="zh" src="captions/vtt/sample-spaced.vtt" />
+            <track label="Spaced" kind="subtitles" srcLang="zh" src="captions/vtt/sample-spaced.vtt" default />
+            <track label="Appended" kind="subtitles" srcLang="zh" src="captions/vtt/sample-appended.vtt" />
             <track label="Plain" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" />
             <track label="Split" kind="subtitles" srcLang="zh" src="captions/vtt/sample-split.vtt" />
          </video>
