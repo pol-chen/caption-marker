@@ -64,3 +64,71 @@
   color: @white-color;
   background-color: @brand-color;
 }
+
+#settings {
+	width: 400px;
+	padding: 15px;
+	background-color: @background-color;
+}
+h1 {
+	margin: 10px 0 16px 0;
+	color: @sub-color;
+}
+label {
+	display: block;
+	margin-bottom: 2px;
+	font-size: 14px;
+}
+input {
+	display: block;
+	width: 100%;
+	height: 44px;
+	margin-bottom: 18px;
+	padding: 0 8px;
+	line-height: 44px;
+	font-size: 16px;
+	font-weight: 400;
+	color: @text-color;
+	border: 1px solid @sub-color;
+	border-radius: 6px;
+	background-color: @background-color;
+	outline: 0;
+}
+input:hover,
+input:focus {
+	border: 1px solid @sub-color;
+}
+select {
+	display: block;
+	width: 100%;
+	height: 44px;
+	margin-bottom: 18px;
+	padding: 0 8px;
+	line-height: 44px;
+	font-size: 16px;
+	font-weight: 400;
+	color: @text-color;
+	border: 1px solid @sub-color;
+	outline: 0;
+}
+a.btn-main {
+	display: block;
+	width: 100%;
+	height: 44px;
+	margin-bottom: 12px;
+	padding: 0 8px;
+	text-align: center;
+	line-height: 44px;
+	font-size: 18px;
+	font-weight: 400;
+	color: @white-color;
+	background-color: @sub-color;
+	border: 1px solid @sub-color;
+	border-radius: 6px;
+	outline: 0;
+	transition: all .25s ease-in-out;
+	cursor: pointer;
+	&:hover {
+		background-color: darken(@sub-color, 10%);
+	}
+}
