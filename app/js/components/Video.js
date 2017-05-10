@@ -184,7 +184,7 @@ class Video extends React.Component {
 		const trackSrc = `captions/vtt/${videoFilename}${appendedMode ? '-seg' : ''}.vtt`
 		return (
       <figure id="videoContainer">
-         <video id="video" controls preload="metadata" poster="img/poster.png">
+         <video id="video" controls preload="metadata">
             <source src={videoSrc} type="video/mp4" />
             <track label="Default" kind="subtitles" srcLang="zh" src={trackSrc} default />
          </video>
