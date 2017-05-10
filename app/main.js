@@ -83,7 +83,7 @@ ipcMain.on('init-video', (event, arg) => {
 	config.saveConfig('errors', config.readConfig(arg.video).errors)
 
 	config.saveConfig('videoFilename', arg.video)
-	config.saveConfig('captionType', arg.caption)
+	config.saveConfig('captionMode', arg.caption)
 
 	openMainWindow()
 })

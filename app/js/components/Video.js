@@ -9,7 +9,7 @@ let capStyle = {
 	width: 200
 }
 
-let appendedMode = false
+let appendedMode = config.readConfig('captionMode') == 'seg'
 
 class Video extends React.Component {
 	constructor(props) {
