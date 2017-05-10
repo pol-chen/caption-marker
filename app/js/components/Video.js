@@ -180,15 +180,13 @@ class Video extends React.Component {
 	}
 	render() {
 		const videoFilename = config.readConfig('videoFilename')
-		const sourcePath = `videos/${videoFilename}.mp4`
+		const videoSrc = `videos/${videoFilename}.mp4`
+		const trackSrc = `captions/vtt/${videoFilename}${appendedMode ? '-seg' : ''}.vtt`
 		return (
       <figure id="videoContainer">
          <video id="video" controls preload="metadata" poster="img/poster.png">
-            <source src={sourcePath} type="video/mp4" />
-            <track label="Spaced" kind="subtitles" srcLang="zh" src="captions/vtt/sample-spaced.vtt" default />
-            <track label="Appended" kind="subtitles" srcLang="zh" src="captions/vtt/sample-appended.vtt" />
-            <track label="Plain" kind="subtitles" srcLang="zh" src="captions/vtt/sample.vtt" />
-            <track label="Split" kind="subtitles" srcLang="zh" src="captions/vtt/sample-split.vtt" />
+            <source src={videoSrc} type="video/mp4" />
+            <track label="Default" kind="subtitles" srcLang="zh" src={trackSrc} default />
          </video>
          <div id="cap" style={capStyle}></div>
       </figure>
