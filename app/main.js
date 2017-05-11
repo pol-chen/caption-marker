@@ -58,7 +58,8 @@ function openSettingsWindow() {
 		width: 400,
 		height: 420,
 		backgroundColor: backgroundColor,
-		show: false
+		show: false,
+		resizable: false
 	})
 
 	settingsWindow.once('ready-to-show', () => {
