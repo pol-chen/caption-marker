@@ -26,6 +26,7 @@ class Video extends React.Component {
 			this.initConfig()
 		}
 
+		cap.style.display = 'none'
 		if (appendedMode) {
 			const textTrack = document.querySelector('video').textTracks[0]
 			const cap = document.querySelector('#cap')
@@ -37,16 +38,14 @@ class Video extends React.Component {
 				// if (cue.endTime != lastEndTime) {
 					const capCount = that.state.capCount
 					if (capCount == 2) {
+						cap.style.display = 'none'
 						that.setState({capCount: 0})
 						that.setState({capString: ''})
-						capStyle = {
-							visibility: 'hidden',
-							width: 0
-						}
 						console.log('Set zero 2')
 					}
 					if (cue) {
 						console.log('Active cue:', cue.startTime, cue.endTime, cue.text)
+						cap.style.display = ''
 						const lastCap = that.state.capString
 						const separator = '　'
 						let capString
@@ -60,29 +59,18 @@ class Video extends React.Component {
 						}
 						const capWidth = capString.length * 36 + 2
 						capStyle = {
-							visibility: 'visible',
 							width: capWidth
 						}
 						that.setState({capString: capString})
 						that.setState({lastEndTime: cue.endTime})
 					} else {
 						console.log('No cue')
+						cap.style.display = 'none'
 						that.setState({capCount: 0})
 						that.setState({capString: ''})
-						capStyle = {
-							visibility: 'hidden',
-							width: 0
-						}
 						console.log('Set zero')
 					}
 				// }
-			}
-		} else {
-			this.setState({capCount: 0})
-			this.setState({capString: ''})
-			capStyle = {
-				visibility: 'hidden',
-				width: 0
 			}
 		}
   }
