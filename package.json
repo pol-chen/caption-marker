@@ -4,7 +4,11 @@
     "watch": "webpack-dev-server",
     "dev": "NODE_ENV='development' npm run start",
     "electron-rebuild": "electron-rebuild",
-    "postinstall": "install-app-deps"
+    "postinstall": "install-app-deps",
+    "clean": "rm -rf ./dist",
+    "build": "rm -rf ./app/built && webpack -p --config webpack.config.production.js",
+    "pack": "npm run build && npm run clean && build --dir",
+    "dist": "npm run build && npm run clean && build --mac --linux deb tar.xz --win --x64"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
@@ -31,5 +35,28 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/PolarisChen/caption-marker"
+  },
+  "build": {
+    "appId": "com.PolarisChen.CaptionMarker",
+    "build.mac.category": "public.app-category.utilities",
+    "win": {
+      "iconUrl": "https://raw.githubusercontent.com/PolarisChen/caption-marker/master/build/icon.png"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 382,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 220,
+          "type": "file",
+          "path": ""
+        }
+      ]
+    }
   }
 }
