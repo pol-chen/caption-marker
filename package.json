@@ -8,7 +8,8 @@
     "clean": "rm -rf ./dist",
     "build": "rm -rf ./app/built && webpack -p --config webpack.config.production.js",
     "pack": "npm run build && npm run clean && build --dir",
-    "dist": "npm run build && npm run clean && build --mac --linux deb tar.xz --win --x64"
+    "dist": "npm run build && npm run clean && build --mac --linux deb tar.xz --win --x64",
+    "dist-win": "npm run build && npm run clean && build --win --x64"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
