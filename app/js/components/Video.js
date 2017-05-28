@@ -49,7 +49,7 @@ class Video extends React.Component {
 						const lastCap = that.state.capString
 						const separator = '　'
 						let capString
-						if (cue.startTime - lastEndTime < 0.2 && lastCap) {
+						if (cue.startTime - lastEndTime <= 0.1 && lastCap) {
 							capString = lastCap + separator + cue.text
 							that.setState({capCount: capCount + 1})
 							cap.innerHTML = cap.innerHTML + separator + cue.text
