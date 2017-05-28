@@ -1,12 +1,11 @@
 
-const {app, BrowserWindow, ipcMain} = require('electron')
+const electron = require('electron')
+const {app, BrowserWindow, ipcMain} = electron
 const path = require('path')
 
 const config = require('./config')
 
 const backgroundColor = '#F8F8F8'
-const windowWidth = 1280;
-const windowHeight = 744;
 
 let mainWindow
 let settingsWindow
@@ -22,15 +21,14 @@ app.on('ready', () => {
 })
 
 app.on('window-all-closed', () => {
-	if (process.platform != 'darwin') {
-		app.quit()
-	}
+	app.quit()
 })
 
 function openMainWindow() {
+	const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 	mainWindow = new BrowserWindow({
-		width: windowWidth,
-		height: windowHeight,
+		width: width,
+		height: height,
 		backgroundColor: backgroundColor,
 		show: false
 	})
