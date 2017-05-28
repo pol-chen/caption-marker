@@ -26,10 +26,20 @@ class Video extends React.Component {
 			this.initConfig()
 		}
 
+		const video = document.querySelector('video')
+		video.onplay = function () {
+			const name = config.readConfig('name')
+			const videoName = config.readConfig('video')
+			const captionMode = config.readConfig('captionMode')
+			const content = `${name}\t${videoName}\t${captionMode}\t--------START--------`
+			console.log(content)
+			log.append(content)
+		}
+
 		const cap = document.querySelector('#cap')
 		cap.style.display = 'none'
 		if (appendedMode) {
-			const textTrack = document.querySelector('video').textTracks[0]
+			const textTrack = video.textTracks[0]
 			const that = this
 			textTrack.mode = 'hidden'
 			textTrack.oncuechange = function () {
