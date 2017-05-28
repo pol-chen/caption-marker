@@ -35,6 +35,8 @@ function openMainWindow() {
 		show: false
 	})
 
+	mainWindow.openDevTools()
+
 	mainWindow.once('ready-to-show', () => {
 	  mainWindow.show()
 	})
