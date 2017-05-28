@@ -5,6 +5,8 @@
 @sub-color:        #3498db;
 @link-color:       #2ecc71;
 
+@base-font:        "Helvetica Neue", "Open Sans", "Pingfang SC", "Lantinghei SC", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+
 * {
 	box-sizing: border-box;
 }
@@ -13,7 +15,7 @@ body {
 	height: 100vh;
 	margin: 0;
 	background-color: @background-color;
-	font-family: "Helvetica Neue", "Open Sans", "Pingfang SC", "Lantinghei SC";
+	font-family: @base-font;
 	overflow: hidden;
 	-webkit-app-region: drag;
 }

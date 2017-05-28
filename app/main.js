@@ -56,7 +56,7 @@ function installDevtools() {
 function openSettingsWindow() {
 	settingsWindow = new BrowserWindow({
 		width: 400,
-		height: 420,
+		height: 430,
 		backgroundColor: backgroundColor,
 		show: false,
 		resizable: false

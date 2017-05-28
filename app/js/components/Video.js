@@ -26,10 +26,10 @@ class Video extends React.Component {
 			this.initConfig()
 		}
 
+		const cap = document.querySelector('#cap')
 		cap.style.display = 'none'
 		if (appendedMode) {
 			const textTrack = document.querySelector('video').textTracks[0]
-			const cap = document.querySelector('#cap')
 			const that = this
 			textTrack.mode = 'hidden'
 			textTrack.oncuechange = function () {
