@@ -2,7 +2,8 @@
 
 const nconf = require('nconf')
 
-nconf.argv().env().file({file: getUserHome() + '/Documents/caption-marker-config.json'})
+// nconf.argv().env().file({file: getUserHome() + '/Documents/caption-marker-config.json'})
+nconf.argv().env().file({file: 'config.json'})
 
 function saveConfig(settingKey, settingValue) {
   nconf.set(settingKey, settingValue)

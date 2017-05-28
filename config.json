@@ -1,0 +1,73 @@
+{
+  "name": "Lee",
+  "videoFilename": "zootopia",
+  "captionMode": "seg",
+  "video": "疯狂动物城",
+  "speed": "fast",
+  "caption": "less",
+  "captionError": "less",
+  "errors": [
+    "3-2",
+    "5-1",
+    "6-1",
+    "8",
+    "12",
+    "13"
+  ],
+  "dolphin": {
+    "video": "BBC 海豚纪录片",
+    "speed": "slow",
+    "caption": "less",
+    "captionError": "less",
+    "errors": [
+      "3-2",
+      "5-1",
+      "6-1",
+      "8",
+      "12",
+      "13"
+    ]
+  },
+  "likaifu": {
+    "video": "鲁豫有约-李开复",
+    "speed": "slow",
+    "caption": "more",
+    "captionError": "less",
+    "errors": [
+      "3-2",
+      "5-1",
+      "6-1",
+      "8",
+      "12",
+      "13"
+    ]
+  },
+  "news": {
+    "video": "央视新闻联播",
+    "speed": "fast",
+    "caption": "more",
+    "captionError": "less",
+    "errors": [
+      "3-2",
+      "5-1",
+      "6-1",
+      "8",
+      "12",
+      "13"
+    ]
+  },
+  "zootopia": {
+    "video": "疯狂动物城",
+    "speed": "fast",
+    "caption": "less",
+    "captionError": "less",
+    "errors": [
+      "3-2",
+      "5-1",
+      "6-1",
+      "8",
+      "12",
+      "13"
+    ]
+  }
+}
