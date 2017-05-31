@@ -179,7 +179,7 @@ class Video extends React.Component {
 	render() {
 		const videoFilename = config.readConfig('videoFilename')
 		const videoSrc = `videos/${videoFilename}.mp4`
-		const trackSrc = `captions/vtt/${videoFilename}${appendedMode ? '-seg' : ''}.vtt`
+		const trackSrc = `captions/vtt/${videoFilename}${appendedMode ? '-seg' : ''}_error.vtt`
 		return (
       <figure id="videoContainer">
          <video id="video" controls preload="metadata">
