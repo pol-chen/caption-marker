@@ -67,7 +67,7 @@ class Video extends React.Component {
 							capString = cue.text
 							cap.innerHTML = capString
 						}
-						const capWidth = capString.length * 36 + 2
+						const capWidth = capString.length * 50 + 4
 						capStyle = {
 							width: capWidth
 						}
