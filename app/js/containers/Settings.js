@@ -34,7 +34,8 @@ class Settings extends React.Component {
         <label>名字</label>
         <input id="nameInput" type="text" placeholder="请输入您的名字" />
         <label>视频</label>
-        <select id="videoSelect" defaultValue="dolphin">
+        <select id="videoSelect" defaultValue="lufugong">
+          <option value="lufugong">卢浮宫纪录片</option>
           <option value="dolphin">BBC 海豚纪录片</option>
           <option value="likaifu">鲁豫有约-李开复</option>
           <option value="news">央视新闻联播</option>

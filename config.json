@@ -46,6 +46,20 @@
     "37-2",
     "40-1"
   ],
+  "lufugong": {
+    "video": "卢浮宫纪录片",
+    "speed": "slow",
+    "caption": "less",
+    "captionError": "less",
+    "errors": [
+      "7",
+      "17",
+      "30",
+      "3-1",
+      "6-2",
+      "10-3"
+    ]
+  },
   "dolphin": {
     "video": "BBC 海豚纪录片",
     "speed": "slow",

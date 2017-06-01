@@ -33,7 +33,9 @@ class Video extends React.Component {
 			const captionMode = config.readConfig('captionMode')
 			const content = `${name}\t${videoName}\t${captionMode}\t--------START--------`
 			console.log(content)
-			log.append(content)
+			if (config.readConfig('videoFilename') != 'lufugong') {
+				log.append(content)
+			}
 		}
 
 		const cap = document.querySelector('#cap')
@@ -169,7 +171,9 @@ class Video extends React.Component {
 
 			const sep = '\t'
 			const logContent = name+sep+video+sep+speed+sep+caption+sep+captionError+sep+captionId+sep+captionStartTime+sep+captionSection+sep+sectionWithError+sep+markDone+sep+markTime
-      log.append(logContent)
+			if (config.readConfig('videoFilename') != 'lufugong') {
+				log.append(logContent)
+			}
 
 			console.log('Marked', logContent)
 		} else {
